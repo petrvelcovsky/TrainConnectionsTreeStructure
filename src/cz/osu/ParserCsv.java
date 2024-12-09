@@ -15,12 +15,14 @@ public class ParserCsv {
 
     //public Map<String, City> parseCities (){
 
+
+
     public void parseCities (){
 
         Map<String, City> cityMap = new HashMap<>(); //pomocny HashSet
         Map<String, String[]> relations = new HashMap<>(); //pomocny HashSet
 
-        CitiesTree citiesTree = new CitiesTree();
+        //CitiesSearchTree citiesTree = new CitiesSearchTree();
 
         List<String> allRows = FileManager.convertFileToLines(path);
 

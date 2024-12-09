@@ -12,8 +12,6 @@ public class City {
     public City(String id, String name) {
         this.id = id;
         this.name = name;
-        this.parent = null;
-        this.children = null;
     }
 
     public String getId() {

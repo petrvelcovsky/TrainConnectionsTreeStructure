@@ -8,6 +8,8 @@ public class Main {
         ParserCsv parser = new ParserCsv("./dataRoute.csv");
         parser.parseCities();
 
+        CitiesSearchTree searchTree = new CitiesSearchTree();
+
         RouteFinder routeFinder = new RouteFinder();
 
         City rootCity = routeFinder.findRootCity();
