@@ -16,19 +16,6 @@ public class Printer {
         }
     }
 
-   // public static void printCityTree(Map<String, City> cityMap){
-   //     for (City city : cityMap.values()) {
-   //         System.out.println("City: " + city.getName());
-   //         if (city.getParent() != null) {
-   //             System.out.println(" Parent: " + city.getParent().getName());
-   //         }
-   //         if (city.getChildren() != null) {
-   //             for (City child : city.getChildren()) {
-   //                 System.out.println("  Child: " + child.getName());
-   //             }
-   //         }
-   //     }
-   // }
 
 
 }
