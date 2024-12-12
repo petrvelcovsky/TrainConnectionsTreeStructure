@@ -24,7 +24,6 @@ public class City {
         this.child3 = null;
     }
 
-
     public String getId() {
         return id;
     }

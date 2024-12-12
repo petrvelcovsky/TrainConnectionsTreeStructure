@@ -74,5 +74,4 @@ public class ParserCsv {
         return null;
 
     }
-
 }

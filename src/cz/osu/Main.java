@@ -8,7 +8,7 @@ public class Main {
 
         citiesTree.display();
 
-        citiesTree.searchParentByName("Hlučín");
+        //citiesTree.searchParentByName("Hlučín");
         System.out.println(citiesTree.root.getName());
 
     }
