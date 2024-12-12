@@ -9,7 +9,7 @@ public class ParserCsv {
 
     String path;
 
-    ArrayList<RawCity> parsedCities = new ArrayList<>();
+    ArrayList<City> parsedCities = new ArrayList<>();
 
     public ParserCsv(String path) {
 
@@ -17,10 +17,9 @@ public class ParserCsv {
         parsedCities = parseCities ();
     }
 
-    public ArrayList<RawCity> parseCities (){
+    public ArrayList<City> parseCities (){
 
         List<String> allRows = FileManager.convertFileToLines(path);
-
 
         //prvni smycka pro vytvoreni zakladu se Stringy
         for (String row : allRows.subList(1, allRows.size())) {
@@ -39,17 +38,23 @@ public class ParserCsv {
             if (column.length > 4 && !column[4].isEmpty()) {child2Id = column[4];}
             if (column.length > 5 &&!column[5].isEmpty()) {child3Id = column[5];}
 
-            RawCity newCity = new RawCity(id, name, parentId, child1Id, child2Id, child3Id);
+            City newCity = new City(id, name);
+
+            newCity.setParentId(parentId);
+            newCity.setChild1Id(child1Id);
+            newCity.setChild2Id(child2Id);
+            newCity.setChild3Id(child3Id);
 
             parsedCities.add(newCity);
+
 
         }
         return parsedCities;
     }
 
-    public RawCity findRoot (){
+    public City findRoot (){
 
-        for (RawCity city: parsedCities) {
+        for (City city: parsedCities) {
             if (city.getParentId() == null){
                 return city;
             }
@@ -58,9 +63,9 @@ public class ParserCsv {
         return null;
     }
 
-    public RawCity findCity (String id){
+    public City findCity (String id){
 
-        for (RawCity city: parsedCities) {
+        for (City city: parsedCities) {
             if (city.getId().equals(id)){
                 return city;
             }

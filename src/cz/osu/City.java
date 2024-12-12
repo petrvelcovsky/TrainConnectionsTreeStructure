@@ -1,14 +1,13 @@
 package cz.osu;
 
-import java.util.ArrayList;
-
 public class City {
+
     private String id;
     private String name;
-    //private String parentId;
-    //private String child1Id;
-    //private String child2Id;
-    //private  String child3Id;
+    private String parentId;
+    private String child1Id;
+    private String child2Id;
+    private  String child3Id;
 
     private City parent;
     private City child1;
@@ -30,49 +29,9 @@ public class City {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    //public String getParentId() {
-    //    return parentId;
-    //}
-//
-    //public void setParentId(String parentId) {
-    //    this.parentId = parentId;
-    //}
-//
-    //public String getChild1Id() {
-    //    return child1Id;
-    //}
-//
-    //public void setChild1Id(String child1Id) {
-    //    this.child1Id = child1Id;
-    //}
-//
-    //public String getChild2Id() {
-    //    return child2Id;
-    //}
-//
-    //public void setChild2Id(City child2Id) {
-    //    this.child2Id = child2Id;
-    //}
-//
-    //public String getChild3Id() {
-    //    return child3Id;
-    //}
-//
-    //public void setChild3Id(String child3Id) {
-    //    this.child3Id = child3Id;
-    //}
 
     public City getParent() {
         return parent;
@@ -106,7 +65,37 @@ public class City {
         this.child3 = child3;
     }
 
+    public String getParentId() {
+        return parentId;
+    }
 
+    public String getChild1Id() {
+        return child1Id;
+    }
+
+    public String getChild2Id() {
+        return child2Id;
+    }
+
+    public String getChild3Id() {
+        return child3Id;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public void setChild1Id(String child1Id) {
+        this.child1Id = child1Id;
+    }
+
+    public void setChild2Id(String child2Id) {
+        this.child2Id = child2Id;
+    }
+
+    public void setChild3Id(String child3Id) {
+        this.child3Id = child3Id;
+    }
 
     @Override
     public String toString() {
