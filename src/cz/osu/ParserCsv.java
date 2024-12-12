@@ -9,22 +9,18 @@ public class ParserCsv {
 
     String path;
 
+    ArrayList<RawCity> parsedCities = new ArrayList<>();
+
     public ParserCsv(String path) {
+
         this.path = path;
+        parsedCities = parseCities ();
     }
 
-    //public Map<String, City> parseCities (){
-
-
-
-    public void parseCities (){
-
-        Map<String, City> cityMap = new HashMap<>(); //pomocny HashSet
-        Map<String, String[]> relations = new HashMap<>(); //pomocny HashSet
-
-        //CitiesSearchTree citiesTree = new CitiesSearchTree();
+    public ArrayList<RawCity> parseCities (){
 
         List<String> allRows = FileManager.convertFileToLines(path);
+
 
         //prvni smycka pro vytvoreni zakladu se Stringy
         for (String row : allRows.subList(1, allRows.size())) {
@@ -33,56 +29,45 @@ public class ParserCsv {
 
             String id = column[0];
             String name = column[1];
-
-            City city = new City(id, name);
-
             String parentId = null;
-            if (!column[2].isEmpty()) parentId = column[2];
+            String child1Id = null;
+            String child2Id = null;
+            String child3Id = null;
 
-            String[] children = new String[3];
+            if (!column[2].isEmpty()) {parentId = column[2];}
+            if (column.length > 3 && !column[3].isEmpty()) {child1Id = column[3];}
+            if (column.length > 4 && !column[4].isEmpty()) {child2Id = column[4];}
+            if (column.length > 5 &&!column[5].isEmpty()) {child3Id = column[5];}
 
-            int j = 0;
+            RawCity newCity = new RawCity(id, name, parentId, child1Id, child2Id, child3Id);
 
-            for (int i = 3; i < column.length; i++) {
-                if (!column[i].isEmpty()){
-                    children[j] = column[i];
-                    j++;
-                }
-            }
-
-            String[] parentAndChildren = {parentId, children[0], children[1], children[2]};
-
-            cityMap.put(id, city);
-            relations.put(id, parentAndChildren);
+            parsedCities.add(newCity);
 
         }
+        return parsedCities;
+    }
 
+    public RawCity findRoot (){
 
-
-
-
-        // druha smycka pro ropojeni rodicu a deti
-        for (Map.Entry<String, String[]> entry : relations.entrySet()) {
-            String parentId = entry.getValue()[0];
-            City city = cityMap.get(entry.getKey());
-
-            // pripojeni rodice
-            if (parentId != null && cityMap.containsKey(parentId)) {
-                city.setParent(cityMap.get(parentId));
-            }
-
-            // pripojení deti
-            for (int i = 1; i < entry.getValue().length; i++) {
-                String childId = entry.getValue()[i];
-                if (childId != null && cityMap.containsKey(childId)) {
-                    if (city.getChildren() == null) {
-                        city.setChildren(new ArrayList<>());
-                    }
-                    city.getChildren().add(cityMap.get(childId));
-                }
+        for (RawCity city: parsedCities) {
+            if (city.getParentId() == null){
+                return city;
             }
         }
-        //return cityMap;
+
+        return null;
+    }
+
+    public RawCity findCity (String id){
+
+        for (RawCity city: parsedCities) {
+            if (city.getId().equals(id)){
+                return city;
+            }
+        }
+
+        return null;
+
     }
 
 }

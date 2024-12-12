@@ -4,32 +4,12 @@ import java.util.Map;
 
 public class RouteFinder {
 
-    private Map<String, City> cityMap;
+    private City root;
 
-    public RouteFinder(Map<String, City> cityMap) {
-        this.cityMap = cityMap;
+    public RouteFinder(City root) {
+        this.root = root;
     }
 
-    public RouteFinder() {
-    }
-
-    public City findRootCity() {
-        for (City city : cityMap.values()) {
-            if (city.getParent() == null) {
-                return city;
-            }
-        }
-        return null;
-    }
-
-    public City findCityByName(String cityName) {
-        for (City city : cityMap.values()) {
-            if (city.getName().equalsIgnoreCase(cityName)) {
-                return city;
-            }
-        }
-        return null;
-    }
 
     public void traverseTreePreorder(City city){
 
@@ -39,11 +19,16 @@ public class RouteFinder {
         
         Printer.printCityOnly(city);
 
-        if (city.getChildren() != null){
-            for (City child: city.getChildren()) {
-                traverseTreePreorder(child);
-            }
+        if (city.getChild1() != null){
+                traverseTreePreorder(city.getChild1());
         }
+        if (city.getChild2() != null){
+            traverseTreePreorder(city.getChild2());
+        }
+        if (city.getChild2() != null){
+            traverseTreePreorder(city.getChild2());
+        }
+
     }
 
     public void traceParentsUpToRoot(City city){
@@ -68,17 +53,6 @@ public class RouteFinder {
     }
 
 
-    public City searchCityByTraverseTreePreorder(City city, String cityName){
-
-        if (city.getChildren() == null){
-            return city;
-        } else {
-            for (City child: city.getChildren()) {
-                return searchCityByTraverseTreePreorder(child, cityName);
-            }
-        }
-       return null;
-    }
 
 
 }
